@@ -1,6 +1,6 @@
 Spree::User.class_eval do 
 	def self.to_csv
-    CSV.generate(headers: true, encoding: Encoding::UTF_8) do |csv|
+    CSV.generate(headers: true, encoding: Encoding::UTF_8, col_sep: ";") do |csv|
       csv << %w{id email name lastname address state country phone accept_terms_and_conditions accept_comunications }
       all.each do |u|
       	if u.ship_address.present?
@@ -13,7 +13,7 @@ Spree::User.class_eval do
   end
   def to_csv
     user = self
-    CSV.generate(headers: true, encoding: Encoding::UTF_8) do |csv|
+    CSV.generate(headers: true, encoding: Encoding::UTF_8, col_sep: ";" ) do |csv|
       csv << %w{id email name lastname address state country phone accept_terms_and_conditions accept_comunications }
       if user.ship_address.present?
         csv << [Spree.t(:ship_address)]
